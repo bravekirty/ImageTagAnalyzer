@@ -1,22 +1,23 @@
 import json
 
 from fastapi import APIRouter, HTTPException
-from sqlalchemy import insert, select
+from sqlalchemy import insert, select, delete
 
 from app.models import SampleImage
 from app.database import async_session_maker
 from app.sample_images import SAMPLE_IMAGES
 from app.redis_client import get_cached_data, set_cached_data
 
+from app.config import settings
+
 router = APIRouter(prefix="/sample-images", tags=["Sample Images"])
 
 
 @router.get("/")
 async def get_sample_images():
-    cached = get_cached_data("sample_images_list")
-    if cached:
-        print("cached")
-        return cached
+    # cached = get_cached_data("sample_images_list")
+    # if cached:
+    #     return cached
 
     async with async_session_maker() as session:
         result = await session.execute(
@@ -30,11 +31,7 @@ async def get_sample_images():
             {
                 "id": sample.id,
                 "filename": sample.filename,
-                "image_url": (
-                    f"http://localhost:8000{sample.image_url}"
-                    if not sample.image_url.startswith("http")
-                    else sample.image_url
-                ),
+                "image_url": sample.image_url,
                 "description": sample.description,
                 "tags_count": (
                     len(json.loads(sample.tags_json)) if sample.tags_json else 0
@@ -43,17 +40,16 @@ async def get_sample_images():
             for sample in samples
         ]
 
-        set_cached_data("sample_images_list", response_data)
-        print("not cached")
+        # set_cached_data("sample_images_list", response_data)
         return response_data
 
 
 @router.post("/{sample_id}/analyze")
 async def analyze_sample_image(sample_id: int, confidence_threshold: float = 30.0):
-    cache_key = f"sample_analysis_{sample_id}_{confidence_threshold}"
-    cached = get_cached_data(cache_key)
-    if cached:
-        return cached
+    # cache_key = f"sample_analysis_{sample_id}_{confidence_threshold}"
+    # cached = get_cached_data(cache_key)
+    # if cached:
+    #     return cached
 
     async with async_session_maker() as session:
         result = await session.execute(
@@ -91,21 +87,17 @@ async def analyze_sample_image(sample_id: int, confidence_threshold: float = 30.
             "primary_tags": [tag for tag in optimal_tags if tag["is_primary"]],
             "is_sample": True,
         }
-        set_cached_data(cache_key, response_data, expire=86400)
+        # set_cached_data(cache_key, response_data, expire=86400)
         return response_data
 
 
 @router.post("/load")
 async def load_sample_images():
     async with async_session_maker() as session:
+        await session.execute(delete(SampleImage))
+        await session.commit()
         for sample_data in SAMPLE_IMAGES:
-            existing = await session.execute(
-                select(SampleImage).where(
-                    SampleImage.filename == sample_data["filename"]
-                )
-            )
-            if not existing.scalar_one_or_none():
-                stmt = insert(SampleImage).values(**sample_data)
-                await session.execute(stmt)
+            stmt = insert(SampleImage).values(**sample_data)
+            await session.execute(stmt)
 
         await session.commit()

@@ -1,4 +1,3 @@
-// src/components/FullScreenImage.jsx
 import React from 'react';
 
 const FullScreenImage = ({ imageUrl, altText = "Image", onClose }) => {

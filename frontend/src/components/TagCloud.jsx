@@ -1,4 +1,3 @@
-// src/components/TagCloud.jsx
 import React from 'react';
 
 const TagCloud = ({ tags }) => {

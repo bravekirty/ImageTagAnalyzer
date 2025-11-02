@@ -27,6 +27,8 @@ class Settings(BaseSettings):
     IMAGGA_API_KEY: str
     IMAGGA_API_SECRET: str
 
+    FRONTEND_BASE_URL: str
+
     class Config:
         env_file = ".env"
 

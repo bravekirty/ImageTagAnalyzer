@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from 'react';
 import ImageUpload from './components/ImageUpload';
 import TagCloud from './components/TagCloud';

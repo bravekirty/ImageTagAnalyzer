@@ -1,4 +1,3 @@
-// src/components/ImageUpload.jsx
 import React, { useRef, useState, useEffect } from 'react';
 import { uploadImage, getSampleImages, analyzeSampleImage } from '../services/api';
 import toast from 'react-hot-toast';
@@ -72,12 +71,7 @@ const ImageUpload = ({ onUpload, onTags, onLoading, isLoading, uploadedImage }) 
         try {
             const response = await analyzeSampleImage(sample.id);
 
-            let imageUrl = sample.image_url;
-            if (imageUrl && !imageUrl.startsWith('http')) {
-                imageUrl = `http://${imageUrl}`;
-            }
-
-            onUpload(imageUrl);
+            onUpload(sample.image_url);
             onTags(response.data.tags || []);
 
             toast.success(`Analyzed sample: ${sample.filename}`);

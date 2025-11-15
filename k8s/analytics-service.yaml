@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-service
+  labels:
+    app: imagetag-analyzer
+    tier: analytics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: imagetag-analyzer
+      tier: analytics
+  template:
+    metadata:
+      labels:
+        app: imagetag-analyzer
+        tier: analytics
+    spec:
+      containers:
+      - name: analytics-service
+        image: bravekirty/imagetag-analytics:latest
+        ports:
+        - containerPort: 8002
+        envFrom:
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: app-secrets
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8002
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: analytics-service
+spec:
+  selector:
+    app: imagetag-analyzer
+    tier: analytics
+  ports:
+  - port: 8002
+    targetPort: 8002

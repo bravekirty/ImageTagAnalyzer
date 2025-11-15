@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "analyze-service"
+version = "0.1.0"
+description = "Image analysis service"
+authors = [
+    "Kir Tarasov <bravekirty@gmail.com>"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.13,<4.0"
+shared-models = { path = "../shared", develop = true }
+fastapi = ">=0.116.1,<0.117.0"
+uvicorn = ">=0.35.0,<0.36.0"
+gunicorn = ">=23.0.0,<24.0.0"
+pillow = ">=12.0.0,<13.0.0"
+aiohttp = ">=3.13.2,<4.0.0"
+python-multipart = ">=0.0.20,<0.0.21"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

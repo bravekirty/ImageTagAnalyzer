@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "db-setup"
+version = "0.1.0"
+description = "db setup"
+authors = [
+    "Kir Tarasov <bravekirty@gmail.com>"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.13,<4.0"
+shared-models = { path = "../shared", develop = true }
+alembic = ">=1.16.5,<2.0.0"
+asyncpg = ">=0.30.0,<0.31.0"
+psycopg2-binary = ">=2.9.10,<3.0.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

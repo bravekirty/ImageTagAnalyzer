@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-service
+  labels:
+    app: imagetag-analyzer
+    tier: sample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: imagetag-analyzer
+      tier: sample
+  template:
+    metadata:
+      labels:
+        app: imagetag-analyzer
+        tier: sample
+    spec:
+      containers:
+      - name: sample-service
+        image: bravekirty/imagetag-sample:latest
+        ports:
+        - containerPort: 8003
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        envFrom:
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: app-secrets
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8003
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-service
+spec:
+  selector:
+    app: imagetag-analyzer
+    tier: sample
+  ports:
+  - port: 8003
+    targetPort: 8003

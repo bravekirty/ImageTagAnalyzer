@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  MODE: "PROD"
+  LOG_LEVEL: "INFO"
+  DB_HOST: "db"
+  DB_PORT: "5432"
+  DB_NAME: "tag_analyzer"
+  DB_USER: "postgres"

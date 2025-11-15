@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: imagetag-analyzer
+    tier: cache
+spec:
+  selector:
+    matchLabels:
+      app: imagetag-analyzer
+      tier: cache
+  template:
+    metadata:
+      labels:
+        app: imagetag-analyzer
+        tier: cache
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  selector:
+    app: imagetag-analyzer
+    tier: cache
+  ports:
+  - port: 6379
+    targetPort: 6379

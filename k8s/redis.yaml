@@ -23,11 +23,11 @@ spec:
         - containerPort: 6379
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "100m"
+            memory: "16Mi"
+            cpu: "25m"
           limits:
-            memory: "256Mi"
-            cpu: "200m"
+            memory: "24Mi"
+            cpu: "50m"
 ---
 apiVersion: v1
 kind: Service

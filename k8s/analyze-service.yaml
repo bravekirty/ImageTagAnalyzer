@@ -32,11 +32,11 @@ spec:
             name: app-secrets
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "250m"
+            memory: "32Mi"
+            cpu: "50m"
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "48Mi"
+            cpu: "100m"
         livenessProbe:
           httpGet:
             path: /health

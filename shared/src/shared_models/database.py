@@ -18,7 +18,15 @@ def get_engine():
         db_pass = os.getenv("DB_PASS", "postgres")
         db_host = os.getenv("DB_HOST", "db")
         db_port = os.getenv("DB_PORT", "5432")
-        db_name = os.getenv("DB_NAME", "imagetag")
+        db_name = os.getenv("DB_NAME", "tag_analyzer")
+
+        if isinstance(db_port, str) and ":" in db_port:
+            db_port = db_port.split(":")[-1]
+
+        try:
+            int(db_port)
+        except ValueError:
+            db_port = "5432"
 
         database_url = (
             f"postgresql+asyncpg://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"

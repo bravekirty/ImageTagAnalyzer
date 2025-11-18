@@ -24,7 +24,7 @@ spec:
         - containerPort: 8000
         env:
         - name: FRONTEND_URL
-          value: "http://frontend:3000"
+          value: "http://frontend:80"
         - name: ANALYZE_SERVICE_URL
           value: "http://analyze-service:8001"
         - name: ANALYTICS_SERVICE_URL

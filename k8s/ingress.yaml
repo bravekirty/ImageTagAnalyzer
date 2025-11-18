@@ -3,12 +3,10 @@ kind: Ingress
 metadata:
   name: imagetag-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
-  ingressClassName: nginx
   rules:
-  - host: localhost
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -17,8 +15,8 @@ spec:
             name: frontend
             port:
               number: 80
-      - path: /api/?(.*)
-        pathType: ImplementationSpecific
+      - path: /api
+        pathType: Prefix
         backend:
           service:
             name: gateway

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: imagetag-frontend
@@ -22,11 +22,11 @@ spec:
           value: "/api"
         resources:
           requests:
-            memory: "32Mi"
-            cpu: "50m"
-          limits:
-            memory: "48Mi"
+            memory: "128Mi"
             cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
         livenessProbe:
           httpGet:
             path: /health
@@ -50,4 +50,4 @@ spec:
   ports:
   - port: 80
     targetPort: 3000
-  type: ClusterIP
+  type: LoadBalancer

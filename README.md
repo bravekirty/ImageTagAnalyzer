@@ -1,11 +1,7 @@
-# ✋😎🤚 ImageTagAnalyzer
+# Image Tag Analyzer
 
-<!-- 
-
-[![ru_readme](https://img.shields.io/badge/Readme-на_Русском-darkblue)](https://github.com/Tarasyonok/ImageTagAnalyzer/blob/main/README.ru.md)
-
-> **See What AI Sees in Your Images**  
-> *Unlock the hidden tags and insights within your visuals* 🔍
+> **Узнай, что ИИ видит на твоих изображениях**  
+> *Открой скрытые теги и смыслы в своих визуалах* 🔍
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.116-009689?logo=fastapi)
@@ -13,168 +9,191 @@
 ![Redis](https://img.shields.io/badge/Redis-7-FF443B?logo=redis)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3.4-00B5D2?logo=tailwindcss)
-![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
-![Nginx](https://img.shields.io/badge/Nginx-1.29-009639?logo=nginx)
+![Docker](https://img.shields.io/badge/Docker-Containers-2496ED?logo=docker)
+![K8s](https://img.shields.io/badge/K8s-1.30.5-326DE6?logo=kubernetes)
 ![Imagga](https://img.shields.io/badge/AI-Imagga_AI-FF6B6B?logo=openai)
 ![License](https://img.shields.io/badge/License-MIT-yellow?logo=readme)
 
-## 🎯 What is ImageTagAnalyzer?
+## 🎯 Что такое Image Tag Analyzer?
 
-**ImageTagAnalyzer** is a full-stack web application that uses advanced AI computer vision to automatically detect and extract tags from your images. Upload any picture and discover what artificial intelligence sees in it!
+**Image Tag Analyzer** — это full-stack веб-приложение, которое использует продвинутое компьютерное зрение для автоматического определения и извлечения тегов из ваших изображений. Загрузите любую картинку и узнайте, что искусственный интеллект видит в ней!
 
-### ✨ Why ImageTagAnalyzer?
+### ✨ Зачем нужен Image Tag Analyzer?
 
-- 🤖 **AI-Powered Analysis** - Imagga's computer vision technology
-- 🚀 **Lightning Fast** - Async backend for optimal performance
-- 📊 **Analytics Dashboard** - Track usage statistics and popular tags
-- 🎨 **Modern UI** - Responsive design that works on all devices
-- 🆓 **Try Before Upload** - Sample images to test the AI instantly
+- 🤖 **Анализ на основе ИИ** - Технология компьютерного зрения от Imagga
+- 🚀 **Молниеносная скорость** - Асинхронный бэкенд для оптимальной производительности
+- 📊 **Панель аналитики** - Отслеживайте статистику использования и популярные теги
+- 🎨 **Современный UI** - Адаптивный дизайн для всех устройств
+- 🆓 **Попробуй перед загрузкой** - Примеры изображений для мгновенного тестирования ИИ
 
 ## 🚀 Image Tag Analyzer Live
 
-### 👉 **[Try Image Tag Analyzer](https://your-deployment-link-here)** 👈
+### 👉 **[Попробовать Image Tag Analyzer](https://imagetaganalyzer.rdeaps.com)** 👈
 
-**No registration required!** Just upload an image or click the sample buttons to get started.
+**Регистрация не требуется!** Просто загрузите изображение или нажмите на примеры для мгновенного старта.
 
-## 📸 Screenshot
+## 📸 Скриншот
 
 <details>
-    <summary>🏠 Main Interface</summary><br>
-    <img src="readme_img.png" alt="Main Interface" width="100%">
+    <summary>🏠 Главный интерфейс</summary><br>
+    <img src="readme_img.png" alt="Главный интерфейс" width="100%">
 </details>
 
-## 🛠️ Tech Stack
+## 🏗️ Архитектура: Микросервисы на практике
 
-### **Backend** *(Primary Focus)*
+Этот проект — **эксперимент с микросервисной архитектурой** на реальном примере. Цель: понять на практике принципы распределенных систем.
 
-- **Python** - Core programming language
-- **FastAPI** - Modern, fast web framework for building APIs
-- **SQLAlchemy** - SQL toolkit and Object-Relational Mapping (ORM)
-- **PostgreSQL** - Production database
-- **Redis** - Endpoints caching
-- **Async/Await** - High-performance asynchronous operations
+**Схема микросервисов ([подробнее](https://github.com/bravekirty/ImageTagAnalyzer/blob/main/Microservices_Diagram.md)):**
 
-### **Frontend**
+- **API Gateway (FastAPI)** - Единая точка входа
+- **analyze-service** - Загрузка + AI-анализ изображений
+- **analytics-service** - Статистика тегов и аналитика
+- **sample-service** - Демо-режим с кешированием в Redis
+- **Frontend (React)** - Отдельное SPA-приложение
 
-- **React** - Modern JavaScript library for user interfaces
-- **Tailwind CSS** - Utility-first CSS framework
-- **Nginx** - High-performance web server and reverse proxy
-- **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+Все сервисы развернуты в **Kubernetes (Minikube)** с полным описанием инфраструктуры как кода.
 
-### **AI & External Services**
+## 🛠️ Технологический стек
 
-- **Imagga AI** - Advanced computer vision API for image tagging
-- **Docker** - Containerization
-- **Railway** - Deployment platform
+### **Бэкенд** *(Основной фокус)*
 
-## 🎨 Key Features
+- **Python** - Основной язык программирования
+- **FastAPI** - Современный, быстрый веб-фреймворк для создания API
+- **SQLAlchemy** - SQL toolkit и Object-Relational Mapping (ORM)
+- **PostgreSQL** - Продакшен база данных
+- **Redis** - Кеширование endpoints
+- **Async/Await** - Высокопроизводительные асинхронные операции
+- **Kubernetes** - Оркестрация контейнеров и инфраструктура как код
 
-### 🏷️ **Smart Tag Extraction**
+### **Фронтенд**
 
-- **Automated Tagging** - AI identifies objects, scenes, and concepts
-- **Confidence Scores** - See how confident the AI is about each tag
-- **Sample Images** - Quick test with strawberry 🍓, urban 🌆, and autumn 🍂 scenes
+- **React** - Современная JavaScript библиотека для пользовательских интерфейсов
+- **Tailwind CSS** - Utility-first CSS фреймворк
+- **Nginx** - Высокопроизводительный веб-сервер и reverse proxy
+- **Адаптивный дизайн** - Идеально работает на десктопе, планшете и мобильных
 
-### 📊 **Analytics Dashboard**
+### **ИИ и внешние сервисы**
 
-- **Total Images Analyzed** - Track overall usage
-- **Average Tags Per Image** - Understand AI detection patterns
-- **Top 5 Popular Tags** - Discover most commonly detected objects
-- **Real-time Statistics** - Live updates as more images are analyzed
+- **Imagga AI** - Продвинутое API компьютерного зрения для тегирования изображений
+- **Docker** - Контейнеризация
+- **VPS** - Развертывание на собственном сервере
 
-### ⚡ **Performance & UX**
+## 🎨 Ключевые возможности
 
-- **Async Backend** - Non-blocking operations for better performance
-- **Modern UI/UX** - Clean, intuitive interface with Tailwind CSS
-- **Mobile Responsive** - Perfect experience on all devices
-- **Fast Loading** - Optimized assets and efficient API calls
+### 🏷️ **Умное извлечение тегов**
 
-## 🚀 Quick Start
+- **Автоматическое тегирование** - ИИ определяет объекты, сцены и концепции
+- **Оценка уверенности** - Узнайте, насколько ИИ уверен в каждом теге
+- **Примеры изображений** - Быстрый тест с клубникой 🍓, городом 🌆 и осенью 🍂
 
-1. **Clone the repository**
+### 📊 **Панель аналитики**
+
+- **Всего проанализировано изображений** - Отслеживайте общее использование
+- **Среднее количество тегов на изображение** - Понимание паттернов обнаружения ИИ
+- **Топ-5 популярных тегов** - Откройте наиболее часто определяемые объекты
+- **Статистика в реальном времени** - Живые обновления по мере анализа изображений
+
+### ⚡ **Производительность и UX**
+
+- **Асинхронный бэкенд** - Неблокирующие операции для лучшей производительности
+- **Современный UI/UX** - Чистый, интуитивный интерфейс с Tailwind CSS
+- **Мобильная адаптивность** - Идеальный опыт на всех устройствах
+- **Быстрая загрузка** - Оптимизированные ассеты и эффективные API-вызовы
+
+Вот обновленная секция "Быстрый старт" с командами для Kubernetes:
+
+## 🚀 Быстрый старт
+
+1. **Клонируйте репозиторий**
 
    ```bash
-   git clone https://github.com/Tarasyonok/ImageTagAnalyzer
+   git clone https://github.com/bravekirty/ImageTagAnalyzer
    cd ImageTagAnalyzer
    ```
 
-2. **Configure environment variables for backend**
+2. **Настройте переменные окружения**
 
    ```bash
-   cd backend
+   # Скопируйте и настройте .env файл
    cp .env.example .env
-   # Edit .env with your Imagga API credentials and database settings
-   cd ..
+   # Отредактируйте .env с вашими учетными данными Imagga API и настройками БД
    ```
 
-3. **Run with Docker Compose**
+3. **Запустите с помощью Kubernetes (Minikube)**
 
    ```bash
-   docker-compose up --build
+   # Примените все конфигурации Kubernetes
+   kubectl apply -f k8s/
+   
+   # Дождитесь готовности подов
+   kubectl get pods --watch
+   
+   # Используйте port-forward для локального доступа
+   kubectl port-forward service/api-gateway-service 8000:80
+   # Приложение будет доступно по адресу: http://localhost:8000
    ```
 
-## 🚀 Deployment
+## 🌐 Деплой
 
-### Image Tag Analyzer is deployed on **Railway**
+### Image Tag Analyzer развернут на **моем VPS**
 
-- **Backend** - FastAPI endpoints
-- **PostgreSQL** - Production database
-- **Frontend** - Nginx and React
-- **Redis** - Sample images caching
-- **Environment Variables** - Secure configuration management
+- **Бэкенд** - FastAPI endpoints
+- **PostgreSQL** - Продакшен база данных
+- **Фронтенд** - Nginx и React
+- **Redis** - Кеширование примеров изображений
+- **Переменные окружения** - Безопасное управление конфигурацией
 
-## 🤝 Contributing
+## 🤝 Участие в разработке
 
-We welcome contributions! Here's how you can help:
+Мы рады участию! Вот как вы можете помочь:
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
+1. **Сделайте форк** репозитория
+2. **Создайте** feature ветку (`git checkout -b feature/amazing-feature`)
+3. **Закоммитьте** изменения (`git commit -m 'Add amazing feature'`)
+4. **Запушьте** в ветку (`git push origin feature/amazing-feature`)
+5. **Откройте** Pull Request
 
-### Development Guidelines
+### Рекомендации по разработке
 
-- Follow Python PEP 8 standards
-- Update readme accordingly
+- Следуйте стандартам Python PEP 8
+- Обновляйте readme соответственно
 
-## 🏆 Technical Achievements
+## 🏆 Технические достижения
 
-This project demonstrates expertise in:
+Этот проект демонстрирует мастерство в:
 
-- ✅ **Full-Stack Development** - End-to-end web application
-- ✅ **Async Programming** - High-performance async/await patterns
-- ✅ **Database Design** - Efficient data modeling with SQLAlchemy
-- ✅ **Containerization** - Docker and multi-container
-- ✅ **External API Integration** - Third-party service integration
-- ✅ **Modern Frontend** - React with responsive design
-- ✅ **Production Deployment** - Nginx, PostgreSQL, and cloud setup
+- ✅ **Full-Stack разработка** - End-to-end веб-приложение
+- ✅ **Асинхронное программирование** - Высокопроизводительные паттерны async/await
+- ✅ **Микросервисная архитектура** - Распределенная система с четкими контрактами ([схема](https://github.com/bravekirty/ImageTagAnalyzer/blob/main/Microservices_Diagram.md))
+- ✅ **Дизайн базы данных** - Эффективное моделирование данных с SQLAlchemy
+- ✅ **Контейнеризация** - Docker и multi-container
+- ✅ **Интеграция внешних API** - Интеграция сторонних сервисов
+- ✅ **Современный фронтенд** - React с адаптивным дизайном
+- ✅ **Продакшен деплой** - Nginx, PostgreSQL и Kubernetes
 
-## 👨‍💻 About the Developer
+## 👨‍💻 О разработчике
 
-**Kir Tarasov**  
-*Full-Stack Developer & AI Enthusiast*
+**Кирилл Тарасов**  
+*Python Backend Developer & AI энтузиаст*
 
 - ✈️ **Telegram**: [@bravekirty](https://t.me/bravekirty)
-- 🐙 **GitHub**: [@Tarasyonok](https://github.com/Tarasyonok)
+- 🐙 **GitHub**: [@bravekirty](https://github.com/bravekirty)
 - 📧 **Email**: <bravekirty@gmail.com>
 
-*Passionate about building practical applications that leverage AI and modern web technologies.*
+*Увлечен созданием практичных приложений, использующих ИИ и современные веб-технологии.*
 
-## 📄 License
+## 📄 Лицензия
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Этот проект лицензирован под MIT License - смотрите файл [LICENSE](LICENSE) для деталей.
 
 ---
 
 <div align="center">
 
-### **Ready to discover what AI sees in your images?** 🤖
+### **Готовы узнать, что ИИ видит в ваших изображениях?** 🤖
 
-[![Try ImageTagAnalyzer](https://img.shields.io/badge/Try_ImageTagAnalyzer-Live-orange?style=for-the-badge)](https://your-deployment-link-here)
+[![Попробовать ImageTagAnalyzer](https://img.shields.io/badge/Попробовать_ImageTagAnalyzer-Live-orange?style=for-the-badge)](https://imagetaganalyzer.rdeaps.com)
 
-*⭐ Don't forget to star this repo if you found it interesting/helpful!*
+*⭐ Не забудь поставить звёздочку репозиторию, если он тебе понравился!*
 
 </div>
-
- -->
